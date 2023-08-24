@@ -18,9 +18,9 @@ jobs:
       # Action을 사용하기 위해서는 'uses' 키워드를 사용해야 합니다.
       - uses: actions/checkout@v3
 
-      # 해당 작업의 이름을 Node.js 14.x라고 명시합니다.
+      # 해당 작업의 이름을 Node.js 16.x라고 명시합니다.
       # setup-node도 checkout처럼 누군가 만들어 놓은 Action입니다.
-      - name: Use Node.js 14.x
+      - name: Use Node.js 16.x
         # 이러한 기능을 제공하는 Action을 가져다 씁니다.
         uses: actions/setup-node@v3
         # with라는 키워드로 해당 Action에 값을 전달합니다.
