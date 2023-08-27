@@ -8,9 +8,7 @@ export class AppApiService {
     private readonly logger: PinoLogger,
   ) {}
   getHello(): string {
-    this.logger.trace({ foo: 'bar' }, 'baz %s', 'qux');
-    this.logger.debug('foo %s %o', 'bar', { baz: 'qux' });
-    this.logger.info('foo');
+    this.logger.info('foo lansdflnsdf');
     return 'Hello World!';
   }
 }
