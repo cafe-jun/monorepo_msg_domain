@@ -18,10 +18,13 @@ export class User extends PrimaryGeneratedPkEntity {
   @Column('varchar', { nullable: true })
   refreshToken: string;
 
-  constructor(email: string, password: string, nickname: string) {
+  private constructor(email: string, password: string, nickname: string) {
     super();
     this.email = email;
     this.password = password;
     this.nickname = nickname;
+  }
+  static of(email: string, password: string, nickname: string): User {
+    return new User(email, password, nickname);
   }
 }
