@@ -1,4 +1,8 @@
-import { Module } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  Module,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AppApiController } from './app-api.controller';
 import { AppApiService } from './app-api.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +11,8 @@ import { LoggerModule } from 'nestjs-pino';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import pino from 'pino';
 import { User } from '@app/entity/domain/user/user.entity';
+import { APP_PIPE } from '@nestjs/core';
+import { ArgumentInvalidException } from './common/exception/argument-invalid.exception';
 
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
@@ -48,6 +54,21 @@ import { User } from '@app/entity/domain/user/user.entity';
     }),
   ],
   controllers: [AppApiController],
-  providers: [AppApiService],
+  providers: [
+    AppApiService,
+    {
+      provide: APP_PIPE,
+      useFactory: () =>
+        new ValidationPipe({
+          transformOptions: {
+            enableImplicitConversion: true,
+          },
+          whitelist: true,
+          forbidNonWhitelisted: true,
+          transform: true,
+          exceptionFactory: (_error) => new ArgumentInvalidException(),
+        }),
+    },
+  ],
 })
 export class AppApiModule {}
