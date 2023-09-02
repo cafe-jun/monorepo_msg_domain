@@ -11,8 +11,10 @@ import { LoggerModule } from 'nestjs-pino';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import pino from 'pino';
 import { User } from '@app/entity/domain/user/user.entity';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ArgumentInvalidException } from './common/exception/argument-invalid.exception';
+import { ResponseInterceptor } from './common/interceptor/response.interceptor';
+import { GlobalExceptionFilter } from './common/filter/global-exception.filter';
 
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
@@ -68,6 +70,14 @@ import { ArgumentInvalidException } from './common/exception/argument-invalid.ex
           transform: true,
           exceptionFactory: (_error) => new ArgumentInvalidException(),
         }),
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter,
     },
   ],
 })
