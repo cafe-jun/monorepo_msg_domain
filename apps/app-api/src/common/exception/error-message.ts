@@ -1,6 +1,6 @@
 import { Enum, EnumType } from 'ts-jenum';
 
-@Enum('code')
+@Enum('message')
 export class ErrorMessage extends EnumType<ErrorMessage>() {
   static readonly ARGUMENT_INVALID = new ErrorMessage(
     '잘못된 파라미터 입니다.',
