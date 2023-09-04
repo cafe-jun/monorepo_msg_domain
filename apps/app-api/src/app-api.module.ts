@@ -18,6 +18,8 @@ import { GlobalExceptionFilter } from './common/filter/global-exception.filter';
 import { MySqlConfigModule } from './config/mysql/mysql-config.module';
 import { MySQLConfigService } from './config/mysql/mysql-config.service';
 import { DataSource } from 'typeorm';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
@@ -43,7 +45,9 @@ import { DataSource } from 'typeorm';
         entities: [User],
         synchronize: false,
         logging: true,
+        autoLoadEntities: true,
       }),
+
       dataSourceFactory: async (option) => {
         const dataSource = await new DataSource(option).initialize();
         return dataSource;
@@ -66,6 +70,8 @@ import { DataSource } from 'typeorm';
         },
       },
     }),
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppApiController],
   providers: [
