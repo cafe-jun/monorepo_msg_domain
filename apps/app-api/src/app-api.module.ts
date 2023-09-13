@@ -1,3 +1,4 @@
+import { UserRelationShip } from './../../../libs/entity/src/domain/user-relationship/user-relationship.entity';
 import {
   InternalServerErrorException,
   Module,
@@ -40,8 +41,8 @@ import { DataSource } from 'typeorm';
         username: mysqlConfigService.username,
         password: mysqlConfigService.password,
         database: mysqlConfigService.database,
-        entities: [User],
-        synchronize: false,
+        entities: [User, UserRelationShip],
+        synchronize: true,
         logging: true,
       }),
       dataSourceFactory: async (option) => {

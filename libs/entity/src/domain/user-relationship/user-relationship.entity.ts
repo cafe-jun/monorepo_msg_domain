@@ -3,7 +3,7 @@ import { PrimaryGeneratedPkEntity } from '../common/primary-generated-pk.entity'
 import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
 import { UserRelationShipStatus } from './user-relationship.status';
 
-@Entity()
+@Entity({ database: 'message' })
 export class UserRelationShip extends PrimaryGeneratedPkEntity {
   @Column()
   toUserId: number;
@@ -11,19 +11,23 @@ export class UserRelationShip extends PrimaryGeneratedPkEntity {
   @Column()
   fromUserId: number;
 
-  @Column('enum', {
-    enum: UserRelationShipStatus,
+  @Column('varchar', {
+    
   })
-  status: UserRelationShipStatus;
+  _status: UserRelationShipStatus;
 
-  // private constructor(email: string, password: string, nickname: string) {
-  //   super();
-  // }
-  // static of(
-  //   email: string,
-  //   password: string,
-  //   nickname: string,
-  // ): UserRelationShip {
-  //   return new UserRelationShip(email, password, nickname);
-  // }
+
+  get status() {
+    UserRelationShipStatus[this._st]
+  }
+  private constructor(toUserId: string, fromUserId: string, status: string) {
+    super();
+  }
+  static of(
+    toUserId: string,
+    fromUserId: string,
+    status: string,
+  ): UserRelationShip {
+    return new UserRelationShip(toUserId, fromUserId, status);
+  }
 }
