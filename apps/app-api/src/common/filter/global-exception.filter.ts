@@ -31,7 +31,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       timestamp,
     };
     this.logger.error(`HTTP Error: ${statusCode} - Message: ${message}`);
-    this.logger.error(exception);
+    this.logger.error(`exception ${JSON.stringify(exception)}`);
     response.json(responseBody);
   }
 }
