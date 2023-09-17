@@ -101,5 +101,6 @@
     "moduleNameMapper": {
       "^@app/entity(|/.*)$": "<rootDir>/libs/entity/src/$1"
     }
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
