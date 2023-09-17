@@ -1,16 +1,17 @@
+import { getSalt } from './../../common/util/hash-crypto.util';
 import { User } from '@app/entity/domain/user/user.entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from '../user.service';
 import { UserRepository } from '../user.respository';
 
-const createUser = () => {
-  return User.of('test@test.com', '123', 'nick');
+const createUser = (salt) => {
+  return User.of('test@test.com', '123', salt, 'nick');
 };
 
-describe('UserService', () => {
+describe('[user][service]', () => {
   let userService: UserService;
   let userRepository: UserRepository;
-
+  const salt = getSalt();
   beforeEach(async () => {
     const userRepositoryMock = {
       findOneByEmail: jest.fn(),
@@ -37,11 +38,12 @@ describe('UserService', () => {
     jest.clearAllMocks();
   });
 
-  describe('[user][service] 이메일로 유저 정보 가져오기 ', () => {
+  describe('이메일로 유저 정보 가져오기 ', () => {
     it('유저 정보 가져오기 성공', async () => {
       // Given
+
       const userEmail = 'a@na.com';
-      const user: User = createUser();
+      const user: User = createUser(salt);
 
       const findOneBySpy = jest
         .spyOn(userRepository, 'findOneByEmail')
@@ -57,11 +59,11 @@ describe('UserService', () => {
     });
   });
 
-  describe('[user][service] id로 유저 가져오기 ', () => {
+  describe('id로 유저 가져오기 ', () => {
     it('응답 성공', async () => {
       // Given
       const userId = 1;
-      const user: User = createUser();
+      const user: User = createUser(salt);
       const findUserByIdSpy = jest.spyOn(userService, 'findUserById');
       const findOneBySpy = jest
         .spyOn(userRepository, 'findOneById')
@@ -76,11 +78,11 @@ describe('UserService', () => {
       expect(result).toEqual(user);
     });
   });
-  describe('[user][service] 유저 저장하기 ', () => {
+  describe('유저 저장하기 ', () => {
     it('응답 성공', async () => {
       // Given
-      const user = createUser();
-      const saveUser = User.of(user.email, user.password, user.nickname);
+      const user = createUser(salt);
+      const saveUser = User.of(user.email, user.password, salt, user.nickname);
 
       const saveServiceSpy = jest.spyOn(userService, 'save');
       const saveRepoistory = jest
@@ -95,10 +97,10 @@ describe('UserService', () => {
       expect(result).toEqual(saveUser);
     });
   });
-  describe('[user][service] 유저 정보 업데이트 ', () => {
+  describe('유저 정보 업데이트 ', () => {
     it('응답 성공', async () => {
       // Given
-      const user = createUser();
+      const user = createUser(salt);
       const partialUser: Partial<User> = {
         nickname: 'test123123',
       };
@@ -113,11 +115,11 @@ describe('UserService', () => {
       expect(result).toBeUndefined();
     });
   });
-  describe('[user][service] 유저 ids로 유저 여러 정보를 찾기', () => {
+  describe('유저 ids로 유저 여러 정보를 찾기', () => {
     it('응답 성공', async () => {
       // Given
       const userIds = [1, 2];
-      const users = [createUser(), createUser()];
+      const users = [createUser(salt), createUser(salt)];
 
       const findUserByIdsSpy = jest.spyOn(userService, 'findUserByIds');
       const findBySpy = jest
