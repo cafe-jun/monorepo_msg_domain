@@ -20,6 +20,9 @@ import { MySQLConfigService } from './config/mysql/mysql-config.service';
 import { DataSource } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { UserChatRoom } from '@app/entity/domain/chat-room/user-chat-room.entity';
+import { ChatRoom } from '@app/entity/domain/chat-room/chat-room.entity';
+import { UserChatRoomModule } from './user-chat-room/user-chat-room.module';
 
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
@@ -42,8 +45,8 @@ import { UserModule } from './user/user.module';
         username: mysqlConfigService.username,
         password: mysqlConfigService.password,
         database: mysqlConfigService.database,
-        entities: [User],
-        synchronize: false,
+        entities: [User, UserChatRoom, ChatRoom],
+        synchronize: true,
         logging: true,
         autoLoadEntities: true,
       }),
@@ -71,6 +74,7 @@ import { UserModule } from './user/user.module';
       },
     }),
     UserModule,
+    UserChatRoomModule,
     AuthModule,
   ],
   controllers: [AppApiController],

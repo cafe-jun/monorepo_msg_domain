@@ -8,7 +8,7 @@ import { AuthServiceImpl } from '../auth.service.impl';
 import { JwtPayload } from '../jwt/jwt-payload';
 import { MsgToken } from '../jwt/msg-token';
 
-describe('AuthController', () => {
+describe('[auth][controller]', () => {
   let authController: AuthController;
   let authService: AuthService;
 

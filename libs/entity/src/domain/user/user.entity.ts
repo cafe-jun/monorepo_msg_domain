@@ -1,6 +1,7 @@
-import { Column, Entity, Index } from 'typeorm';
+import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { PrimaryGeneratedPkEntity } from '../common/primary-generated-pk.entity';
 import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
+import { UserChatRoom } from '../chat-room/user-chat-room.entity';
 
 @Entity({ database: 'message' })
 export class User extends PrimaryGeneratedPkEntity {
@@ -20,6 +21,9 @@ export class User extends PrimaryGeneratedPkEntity {
 
   @Column('varchar', { nullable: true })
   refreshToken: string;
+
+  @OneToMany(() => UserChatRoom, (userChatRoom) => userChatRoom.user)
+  userChatRooms!: UserChatRoom[];
 
   private constructor(
     email: string,
