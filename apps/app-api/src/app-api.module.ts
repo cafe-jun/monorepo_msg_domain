@@ -1,14 +1,9 @@
-import {
-  InternalServerErrorException,
-  Module,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { AppApiController } from './app-api.controller';
 import { AppApiService } from './app-api.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
-import { ElasticsearchModule } from '@nestjs/elasticsearch';
 import pino from 'pino';
 import { User } from '@app/entity/domain/user/user.entity';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
@@ -23,6 +18,7 @@ import { UserModule } from './user/user.module';
 import { UserChatRoom } from '@app/entity/domain/chat-room/user-chat-room.entity';
 import { ChatRoom } from '@app/entity/domain/chat-room/chat-room.entity';
 import { UserChatRoomModule } from './user-chat-room/user-chat-room.module';
+import { MessageModule } from './message/message.module';
 
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
@@ -46,7 +42,7 @@ import { UserChatRoomModule } from './user-chat-room/user-chat-room.module';
         password: mysqlConfigService.password,
         database: mysqlConfigService.database,
         entities: [User, UserChatRoom, ChatRoom],
-        synchronize: true,
+        synchronize: false,
         logging: true,
         autoLoadEntities: true,
       }),
@@ -75,6 +71,7 @@ import { UserChatRoomModule } from './user-chat-room/user-chat-room.module';
     }),
     UserModule,
     UserChatRoomModule,
+    MessageModule,
     AuthModule,
   ],
   controllers: [AppApiController],
