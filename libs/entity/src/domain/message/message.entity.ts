@@ -6,13 +6,13 @@ import { User } from '../user/user.entity';
 
 @Entity()
 export class Message extends PrimaryGeneratedPkEntity {
-  @Column()
+  @Column({ name: 'send_user_id', type: 'long', unsigned: true })
   @IsNotEmpty()
-  senderId: number;
+  senderUserId: number;
 
   @Column()
   @IsNotEmpty()
-  chatRoomId: number;
+  sendchatRoomId: number;
 
   @Column()
   content: string;
@@ -23,11 +23,19 @@ export class Message extends PrimaryGeneratedPkEntity {
   @Column({ nullable: true })
   deleteAtd: Date;
 
-  @ManyToOne(() => User, (user) => user)
-  @JoinColumn({ name: 'senderId' })
-  sender: User;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'sent_user_id' })
+  private readonly _sentUser: User;
 
   @ManyToOne(() => ChatRoom)
-  @JoinColumn({ name: 'chatRoomId' })
-  chatRoom: ChatRoom;
+  @JoinColumn({ name: 'sent_chat_room_id' })
+  private readonly _chatRoom: ChatRoom;
+
+  static of(sendUserId: number, sendChatRoomId: number, content: string) {
+    const message = new Message();
+    message.senderUserId = sendUserId;
+    message.sendchatRoomId = sendChatRoomId;
+    message.content = content;
+    return message;
+  }
 }

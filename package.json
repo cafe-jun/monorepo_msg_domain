@@ -38,6 +38,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
+    "long": "^5.2.3",
     "mysql2": "^3.6.0",
     "nestjs-pino": "^3.4.0",
     "passport": "^0.6.0",
