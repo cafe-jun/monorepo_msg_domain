@@ -7,6 +7,8 @@ import { getSalt } from '../../common/util/hash-crypto.util';
 import { AuthServiceImpl } from '../auth.service.impl';
 import { JwtPayload } from '../jwt/jwt-payload';
 import { MsgToken } from '../jwt/msg-token';
+import { DataSource } from 'typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 describe('[auth][controller]', () => {
   let authController: AuthController;
@@ -21,6 +23,7 @@ describe('[auth][controller]', () => {
     };
 
     const module: TestingModule = await Test.createTestingModule({
+      imports: [TypeOrmModule.forRoot()],
       controllers: [AuthController],
       providers: [
         {

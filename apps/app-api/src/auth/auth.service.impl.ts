@@ -37,7 +37,6 @@ export class AuthServiceImpl implements AuthService {
     if (!verifyPassword) {
       throw new UserIncorrectPasswordException();
     }
-    console.log('msgToken 진입');
     const msgToken = await this.generateToken(user.id, user.email);
     await this.updateRefreshToken(user.id, msgToken.refreshToken);
     return msgToken;
@@ -76,7 +75,6 @@ export class AuthServiceImpl implements AuthService {
   }
   async generateToken(id: number, email: string): Promise<MsgToken> {
     const payload: JwtPayload = { sub: id, email: email };
-    console.log('payload', payload);
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.sign(payload, {
         secret: process.env.JWT_ACCESS_SECRET,

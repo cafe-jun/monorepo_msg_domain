@@ -21,8 +21,9 @@ export class UserRepositoryImpl implements UserRepository {
       id: In(ids),
     });
   }
-  save(entity: User): Promise<User> {
-    return this.dataSource.save(entity);
+  async save(entity: User): Promise<User> {
+    await this.dataSource.insert(entity);
+    return entity;
   }
   async update(id: number, entity: Partial<User>): Promise<void> {
     await this.dataSource.update(id, entity);

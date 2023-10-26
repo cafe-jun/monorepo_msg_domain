@@ -1,3 +1,4 @@
+import { TransactionInterceptor } from './../common/interceptor/transaction.interceptor';
 import { JwtGuard } from './guard/jwt.guard';
 import { MsgToken } from './jwt/msg-token';
 import {
@@ -8,6 +9,7 @@ import {
   Inject,
   Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserSignUpDto } from '../user/dto/user-signup.dto';
@@ -16,16 +18,21 @@ import { AuthServiceImpl } from './auth.service.impl';
 import { UserSignInDto } from '../user/dto/user-signin.dto';
 import { CurrentUser } from './decorator/current-user.decorater';
 import { JwtRefreshGuard } from './guard/jwt-refresh.guard';
-
+import { QueryRunner } from './decorator/query-runner.decorator';
+import { QueryRunner as QR } from 'typeorm';
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(AuthServiceImpl) private readonly authService: AuthService,
   ) {}
 
+  @UseInterceptors(TransactionInterceptor)
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
-  async signup(@Body() signupDto: UserSignUpDto): Promise<User> {
+  async signup(
+    @Body() signupDto: UserSignUpDto,
+    @QueryRunner() qr?: QR,
+  ): Promise<User> {
     const user = await this.authService.signup(signupDto);
     return user;
   }

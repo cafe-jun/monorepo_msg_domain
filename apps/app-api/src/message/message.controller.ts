@@ -18,7 +18,7 @@ import { ArgumentInvalidException } from '../common/exception/argument-invalid.e
 import { MessageGuard } from './guard/message.guard';
 
 @UseGuards(JwtGuard, UserGuard)
-@Controller()
+@Controller('/message')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
