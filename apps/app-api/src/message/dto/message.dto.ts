@@ -21,8 +21,8 @@ export class MessageDto {
 
   toEntity(): Message {
     const message = new Message();
-    message.senderId = this.senderId;
-    message.chatRoomId = this.chatRoomId;
+    message.senderUserId = this.senderId;
+    message.sendchatRoomId = this.chatRoomId;
     message.content = this.content;
     message.sendAt = getToDayISO8601();
     return message;

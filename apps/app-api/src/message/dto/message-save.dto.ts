@@ -3,7 +3,7 @@ import { Message } from '@app/entity/domain/message/message.entity';
 import { Expose } from 'class-transformer';
 import { IsNumber, IsString } from 'class-validator';
 
-export class MessageSaveDto extends PrimaryGeneratedPkEntity {
+export class MessageSaveDto {
   @Expose({ name: 'sendUserId' })
   @IsNumber()
   private readonly _sendUserId: number;
@@ -29,7 +29,10 @@ export class MessageSaveDto extends PrimaryGeneratedPkEntity {
     return this._sendChatRoomId;
   }
 
-  toEntity(): Message {
-    return Message;
+  get content(): number {
+    return this._content;
   }
+  // toEntity(): Message {
+  //   return Message;
+  // }
 }

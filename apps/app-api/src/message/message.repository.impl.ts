@@ -10,10 +10,10 @@ export class MessageRepositoryImpl implements MessageRepository {
     private repoistory: Repository<Message>,
   ) {}
   findAllByChatRoomIdAndSenderId(
-    chatRoomId: number,
-    senderId: number,
+    sendchatRoomId: number,
+    senderUserId: number,
   ): Promise<Message[]> {
-    return this.repoistory.findBy({ chatRoomId, senderId });
+    return this.repoistory.findBy({ sendchatRoomId, senderUserId });
   }
 
   save(entity: Message): Promise<Message> {
@@ -25,7 +25,6 @@ export class MessageRepositoryImpl implements MessageRepository {
     partialEntity: QueryDeepPartialEntity<Message>,
   ): Promise<void> {
     await this.repoistory.update(id, partialEntity);
-    return;
   }
 
   async delete(id: number): Promise<void> {

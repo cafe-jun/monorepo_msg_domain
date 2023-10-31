@@ -4,6 +4,7 @@ import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppApiModule, { bufferLogs: true });
+  app.setGlobalPrefix('/api');
   app.useLogger(app.get(Logger));
   app.flushLogs();
   await app.listen(3000);
