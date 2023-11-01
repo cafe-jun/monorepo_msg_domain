@@ -15,7 +15,10 @@
       "entryFile": "main",
       "sourceRoot": "apps/app-api/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/app-api/tsconfig.app.json"
+        "tsConfigPath": "apps/app-api/tsconfig.app.json",
+        "builder": {
+          "type": "swc"
+        }
       }
     },
     "entity": {

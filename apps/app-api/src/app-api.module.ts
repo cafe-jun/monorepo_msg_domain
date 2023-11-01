@@ -19,7 +19,9 @@ import { UserChatRoom } from '@app/entity/domain/chat-room/user-chat-room.entity
 import { ChatRoom } from '@app/entity/domain/chat-room/chat-room.entity';
 import { UserChatRoomModule } from './user-chat-room/user-chat-room.module';
 import { MessageModule } from './message/message.module';
-
+import { Message } from '@app/entity/domain/message/message.entity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
  *    -> Pipes -> Controller -> Service
@@ -35,17 +37,19 @@ import { MessageModule } from './message/message.module';
     TypeOrmModule.forRootAsync({
       imports: [MySqlConfigModule],
       inject: [MySQLConfigService],
-      useFactory: (mysqlConfigService: MySQLConfigService) => ({
-        type: 'mysql',
-        host: mysqlConfigService.host,
-        username: mysqlConfigService.username,
-        password: mysqlConfigService.password,
-        database: mysqlConfigService.database,
-        entities: [User, UserChatRoom, ChatRoom],
-        synchronize: false,
-        logging: true,
-        autoLoadEntities: true,
-      }),
+      useFactory: (mysqlConfigService: MySQLConfigService) => {
+        return {
+          type: 'mysql',
+          host: mysqlConfigService.host,
+          username: mysqlConfigService.username,
+          password: mysqlConfigService.password,
+          database: mysqlConfigService.database,
+          entities: [User, UserChatRoom, ChatRoom, Message],
+          synchronize: false,
+          logging: true,
+          autoLoadEntities: true, // 이건 왜 사용하는거지 ?
+        };
+      },
 
       dataSourceFactory: async (option) => {
         const dataSource = await new DataSource(option).initialize();
@@ -74,7 +78,7 @@ import { MessageModule } from './message/message.module';
     MessageModule,
     AuthModule,
   ],
-  controllers: [AppApiController],
+  // controllers: [AppApiController],
   providers: [
     AppApiService,
     {

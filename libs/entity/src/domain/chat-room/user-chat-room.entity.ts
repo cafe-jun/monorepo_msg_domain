@@ -1,32 +1,31 @@
-import { Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { PrimaryGeneratedPkEntity } from '../common/primary-generated-pk.entity';
 import { CompositeKeyAndBaseMetaTimeStampEntity } from '../common/composite-base-meta-timestamp';
 import { User } from '../user/user.entity';
 import { ChatRoom } from './chat-room.entity';
 
 @Entity()
-export class UserChatRoom extends CompositeKeyAndBaseMetaTimeStampEntity {
-  @PrimaryColumn()
+export class UserChatRoom extends PrimaryGeneratedPkEntity {
+  @Column({ name: 'user_id', type: 'int', unsigned: true })
   userId: number;
 
-  @PrimaryColumn()
+  @Column({ name: 'chat_room_id', type: 'int', unsigned: true })
   chatRoomId: number;
 
-  @ManyToOne(() => User, (user) => user.userChatRooms, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (user) => user.userChatRooms, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   user: User;
 
   @ManyToOne(() => ChatRoom, (chatRoom) => chatRoom.userChatRooms, {
-    onDelete: 'CASCADE',
+    cascade: ['insert', 'update', 'remove'],
   })
   chatRoom: ChatRoom;
 
-  private constructor(userId: number, chatRoomId: number) {
-    super();
-    this.userId = userId;
-    this.chatRoomId = chatRoomId;
-  }
-
   static of(userId: number, chatRoomId: number): UserChatRoom {
-    return new UserChatRoom(userId, chatRoomId);
+    const entity = new UserChatRoom();
+    entity.chatRoomId = chatRoomId;
+    entity.userId = userId;
+    return entity;
   }
 }
