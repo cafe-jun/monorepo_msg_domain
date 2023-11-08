@@ -4,7 +4,7 @@ const axios = Axios.create();
 
 axios.interceptors.request.use(
   (config) => {
-    const authToken = localStorage.getItem("token");
+    const authToken = localStorage.getItem("accessToken");
 
     config.headers["Authorization"] = "Bearer " + authToken;
     return config;
@@ -18,12 +18,12 @@ export const auth = async () => {
 };
 
 export const signup = async (data) => {
-  const res = await axios.post("/api/signup", data);
+  const res = await axios.post("/api/auth/signup", data);
   return res.data;
 };
 
 export const login = async (data) => {
-  const res = await axios.post("/api/login", data);
+  const res = await axios.post("/api/auth/signin", data);
   return res.data;
 };
 

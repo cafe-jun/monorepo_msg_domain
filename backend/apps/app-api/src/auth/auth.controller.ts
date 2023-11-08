@@ -8,6 +8,7 @@ import {
   HttpStatus,
   Inject,
   Post,
+  Res,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -20,26 +21,35 @@ import { CurrentUser } from './decorator/current-user.decorater';
 import { JwtRefreshGuard } from './guard/jwt-refresh.guard';
 import { QueryRunner } from './decorator/query-runner.decorator';
 import { QueryRunner as QR } from 'typeorm';
+import { Response } from 'express';
+@UseInterceptors(TransactionInterceptor)
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(AuthServiceImpl) private readonly authService: AuthService,
   ) {}
 
-  @UseInterceptors(TransactionInterceptor)
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   async signup(
     @Body() signupDto: UserSignUpDto,
     @QueryRunner() qr?: QR,
-  ): Promise<User> {
+  ): Promise<Partial<User>> {
     const user = await this.authService.signup(signupDto);
     return user;
   }
   @Post('signin')
   @HttpCode(HttpStatus.OK)
-  async signin(@Body() signinDto: UserSignInDto): Promise<MsgToken> {
-    return await this.authService.signin(signinDto);
+  async signin(
+    @Body() signinDto: UserSignInDto,
+    // passthrough 역활 알아보기
+    @Res({ passthrough: true }) res: Response,
+    @QueryRunner() qr?: QR,
+  ): Promise<Partial<MsgToken>> {
+    const msgToken = await this.authService.signin(signinDto);
+    //TODO: 운영 환경에서 로그인 하기
+    res.cookie('refresh-token', msgToken.refreshToken);
+    return msgToken;
   }
 
   @Post('signout')

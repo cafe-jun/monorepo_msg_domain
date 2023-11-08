@@ -24,7 +24,7 @@ const UserAuth: React.FC<{ children: React.ReactNode }> = ({
   });
 
   const userLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
     refetch();
     navigate("/signup");
   };

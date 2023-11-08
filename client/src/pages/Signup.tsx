@@ -30,8 +30,8 @@ const Signup: React.FC = () => {
     password: "",
   });
 
-  const redirection = (token: string) => {
-    localStorage.setItem("token", token);
+  const redirection = (accessToken: string) => {
+    localStorage.setItem("accessToken", accessToken);
     queryClient.refetchQueries([AUTH]);
     navigate("/");
   };
@@ -43,7 +43,7 @@ const Signup: React.FC = () => {
         title: res.message,
         type: "success",
       });
-      redirection(res.token);
+      redirection(res.result.accessToken);
     },
     onError: (err: any) =>
       setAlert({
@@ -105,33 +105,37 @@ const Signup: React.FC = () => {
           >
             <div className="self-start flex justify-between text-sm font-semibold">
               <p
-                className={`${isLoginToggled ? "text-gray-300" : "text-[#1A2238]"
-                  } cursor-pointer`}
+                className={`${
+                  isLoginToggled ? "text-gray-300" : "text-[#1A2238]"
+                } cursor-pointer`}
                 onClick={() => setIsLoginToggled(false)}
               >
-                Sign up
+                회원가입
               </p>
               <p className="px-1 text-gray-300">/</p>
               <p
-                className={`${isLoginToggled ? "text-[#1A2238]" : "text-gray-300"
-                  } cursor-pointer`}
+                className={`${
+                  isLoginToggled ? "text-[#1A2238]" : "text-gray-300"
+                } cursor-pointer`}
                 onClick={(): void => setIsLoginToggled(true)}
               >
-                Login
+                로그인
               </p>
             </div>
 
             <div className="w-full h-2/3 flex justify-between">
               <div className="w-2/5 h-full flex flex-col justify-between">
                 <p
-                  className={`text-[#1A2238] font-semibold md:text-base text-sm ${isLoginToggled && "absolute"
-                    }`}
+                  className={`text-[#1A2238] font-semibold md:text-base text-sm ${
+                    isLoginToggled && "absolute"
+                  }`}
                 >
                   {isLoginToggled ? "LogIn" : "Signup"}
                 </p>
                 <div
-                  className={`w-full ${isLoginToggled && "h-full flex flex-col justify-center"
-                    }`}
+                  className={`w-full ${
+                    isLoginToggled && "h-full flex flex-col justify-center"
+                  }`}
                 >
                   {isLoginToggled ? (
                     <LoginForm onChange={onChange} loginInfo={loginInfo} />
@@ -158,7 +162,7 @@ const Signup: React.FC = () => {
 
             <input
               type="submit"
-              value="Let's Go"
+              value="회원가입"
               className="rounded-md border border-[#1A2238] px-5 py-2 hover:bg-[#1A2238] hover:text-white trainsition-all duration-300 cursor-pointer"
             />
           </form>

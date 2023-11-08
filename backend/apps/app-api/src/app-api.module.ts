@@ -42,6 +42,7 @@ import { join } from 'path';
       imports: [MySqlConfigModule],
       inject: [MySQLConfigService],
       useFactory: (mysqlConfigService: MySQLConfigService) => {
+        console.log(mysqlConfigService.host);
         return {
           type: 'mysql',
           host: mysqlConfigService.host,

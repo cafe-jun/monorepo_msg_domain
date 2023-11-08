@@ -7,7 +7,7 @@ export const AuthService = 'AuthService';
 
 export interface AuthService {
   signin(dto: UserSignInDto): Promise<MsgToken>;
-  signup(dto: UserSignUpDto): Promise<User>;
+  signup(dto: UserSignUpDto): Promise<Partial<User>>;
   signout(id: number): Promise<void>;
   refreshToken(
     id: number,

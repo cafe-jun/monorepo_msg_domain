@@ -27,13 +27,12 @@ export class AuthServiceImpl implements AuthService {
       throw new UserIncorrectEmailException();
     }
     this.logger.log(`user check :: ${JSON.stringify(user)}`);
-
     const verifyPassword = await verifyString(
       user.password,
       user.salt,
       dto.password,
     );
-    console.log('verifyPassword', verifyPassword);
+
     if (!verifyPassword) {
       throw new UserIncorrectPasswordException();
     }
@@ -41,14 +40,16 @@ export class AuthServiceImpl implements AuthService {
     await this.updateRefreshToken(user.id, msgToken.refreshToken);
     return msgToken;
   }
-  async signup(dto: UserSignUpDto): Promise<User> {
+  async signup(dto: UserSignUpDto): Promise<Partial<User>> {
     const user = await this.userService.findUserByEmail(dto.email);
-
     if (user) {
       throw new UserEmailAlreadyExistsException();
     }
     this.logger.log('auth signup', await dto.toEntity());
-    return await this.userService.save(await dto.toEntity());
+    const saveUser = await this.userService.save(await dto.toEntity());
+    console.log('user:', user);
+    const { password, salt, createdAt, updatedAt, ...restUser } = saveUser;
+    return restUser;
   }
   async signout(id: number): Promise<void> {
     const user = await this.userService.findUserById(id);

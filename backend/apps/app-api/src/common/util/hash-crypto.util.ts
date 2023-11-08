@@ -17,7 +17,6 @@ export const verifyString = async (
   string: string,
 ): Promise<boolean> => {
   const verifyHash = await setHashSync(string, salt);
-  console.log(verifyHash, 'has', hash);
   return verifyHash === hash ? true : false;
 };
 
