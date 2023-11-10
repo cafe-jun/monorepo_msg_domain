@@ -114,11 +114,12 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
         type: "failure",
       }),
   });
-
+  console.log("authUser", authUser);
   return (
     <div
-      className={`${inboxToggle ? "hidden" : "flex"
-        } h-full md:col-span-2 col-span-full md:flex flex-col gap-2 drop-shadow-lg z-10`}
+      className={`${
+        inboxToggle ? "hidden" : "flex"
+      } h-full w-[500px] md:col-span-2 col-span-full md:flex flex-col gap-2 drop-shadow-lg z-10`}
     >
       <div className="w-full basis-20 flex justify-between items-center rounded-tl-lg px-4 shadow-lg">
         <p className="font-dev text-[#FF6A3D] text-7xl">kq</p>
@@ -128,7 +129,7 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
               tabIndex={0}
               className="btn bg-transparent outline-none border-0 hover:bg-transparent"
             >
-              <Avatar
+              {/* <Avatar
                 className="absolute -z-10 text-[#ff6a3d] pointer-events-none"
                 img={
                   authUser && authUser.imgUrl
@@ -138,7 +139,7 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
                 rounded={true}
                 status="online"
                 statusPosition="bottom-right"
-              ></Avatar>
+              ></Avatar> */}
             </label>
             <ul
               tabIndex={0}
@@ -146,14 +147,14 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
             >
               <Dropdown.Header>
                 <span className="block text-sm truncate">
-                  {authUser && authUser.fullname}
+                  {authUser && authUser.email}
                 </span>
                 <span className="block truncate text-sm font-medium">
                   {authUser && authUser.email}
                 </span>
               </Dropdown.Header>
-
-              <Dropdown.Item onClick={() => searchRef.current?.focus()}>
+              {/*  이거 뭔지 알아보기  */}
+              {/* <Dropdown.Item onClick={() => searchRef.current?.focus()}>
                 New Message
               </Dropdown.Item>
               <Dropdown.Divider />
@@ -165,7 +166,7 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
                 Delete Account
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={userLogout}>Sign out</Dropdown.Item>
+              <Dropdown.Item onClick={userLogout}>Sign out</Dropdown.Item> */}
             </ul>
           </div>
         </div>
@@ -178,7 +179,7 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
             onClose={() => setIsAvatarModalOpen(false)}
           >
             <Modal.Header>Pick an Avatar</Modal.Header>
-            <Modal.Body>
+            {/* <Modal.Body>
               <div className="w-full h-full flex justify-between items-center">
                 {isAvatarLoading ? (
                   <Button color="gray">
@@ -199,7 +200,7 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
                   ))
                 )}
               </div>
-            </Modal.Body>
+            </Modal.Body> */}
             <Modal.Footer>
               <Button
                 onClick={() =>
@@ -262,38 +263,38 @@ const Preview: React.FC<Props> = ({ inboxToggle, setInboxToggle, setUser }) => {
       <div
         className={`basis-[80%] flex flex-col overflow-scroll overflow-x-hidden px-3`}
       >
-        {isPreviewLoading
+        {/* {isPreviewLoading
           ? Array.from({ length: 12 }).map((_, i) => <Skeleton key={i} />)
           : users &&
-          users.data.map((user: typeof authUser, index: number) => (
-            <div
-              className="w-full flex justify-between items-start px-3 my-1 py-3 cursor-pointer rounded-lg hover:bg-gray-50"
-              key={index}
-              onClick={() => {
-                setInboxToggle(true);
-                setUser(user._id);
-              }}
-            >
-              <Avatar
-                img={
-                  user.imgUrl && `data:image/svg+xml;base64,${user.imgUrl}`
-                }
-                rounded={true}
-                status="online"
-                statusPosition="bottom-right"
+            users.data.map((user: typeof authUser, index: number) => (
+              <div
+                className="w-full flex justify-between items-start px-3 my-1 py-3 cursor-pointer rounded-lg hover:bg-gray-50"
+                key={index}
+                onClick={() => {
+                  setInboxToggle(true);
+                  setUser(user._id);
+                }}
               >
-                <div className="space-y-1 font-medium w-40">
-                  <div className="truncate">{user.fullname}</div>
-                  <div className="text-sm text-gray-500 truncate">
-                    {user.email}
+                <Avatar
+                  img={
+                    user.imgUrl && `data:image/svg+xml;base64,${user.imgUrl}`
+                  }
+                  rounded={true}
+                  status="online"
+                  statusPosition="bottom-right"
+                >
+                  <div className="space-y-1 font-medium w-40">
+                    <div className="truncate">{user.fullname}</div>
+                    <div className="text-sm text-gray-500 truncate">
+                      {user.email}
+                    </div>
                   </div>
+                </Avatar>
+                <div className="text-gray-500 text-xs py-1">
+                  {moment(user.createdAt).format("ll").slice(0, -6)}
                 </div>
-              </Avatar>
-              <div className="text-gray-500 text-xs py-1">
-                {moment(user.createdAt).format("ll").slice(0, -6)}
               </div>
-            </div>
-          ))}
+            ))} */}
 
         {isPreviewFetching ? (
           <div ref={skeletonRef}>

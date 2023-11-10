@@ -24,9 +24,9 @@ const UserAuth: React.FC<{ children: React.ReactNode }> = ({
   });
 
   const userLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("access-token");
     refetch();
-    navigate("/signup");
+    navigate("/api/auth/signup");
   };
 
   return (

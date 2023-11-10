@@ -5,6 +5,7 @@ import { UserRepository } from './user.respository';
 import { UserRepositoryImpl } from './user.respository.impl';
 import { UserService } from './user.service';
 import { DataSource, EntityManager, Repository } from 'typeorm';
+import { userController } from './user.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -17,6 +18,7 @@ import { DataSource, EntityManager, Repository } from 'typeorm';
       inject: [EntityManager],
     },
   ],
+  controllers: [userController],
   exports: [UserService],
 })
 export class UserModule {}

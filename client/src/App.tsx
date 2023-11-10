@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Signup from "./pages/Signup";
 import Messenger from "./pages/Messenger";
 import UserAuth from "./utils/UserAuth";
 import RequireAuth from "./utils/RequireAuth";
+import Auth from "./pages/Auth";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const App: React.FC = () => {
             </RequireAuth>
           }
         />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </UserAuth>
   );

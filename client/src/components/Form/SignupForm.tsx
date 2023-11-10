@@ -14,75 +14,51 @@ const SignupForm: React.FC<Props> = ({ onChange, signupInfo }) => {
   return (
     <>
       <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="text"
-          name="fullname"
-          id="floating_first_name"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          value={fullname}
-          onChange={onChange}
-          required
-        />
-        <label
-          htmlFor="fullname"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Full Name
-        </label>
+        <div className="mb-6">
+          <label
+            // for="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            이메일
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder=""
+            required
+          />
+        </div>
       </div>
       <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="email"
-          name="email"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          value={email}
-          onChange={onChange}
-          required
-        />
-        <label
-          htmlFor="email"
-          className="peer-focus:font-medium absolute md:text-sm text-xs text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Email address
-        </label>
-      </div>
-      <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="password"
-          name="password"
-          id="floating_password"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          value={password}
-          onChange={onChange}
-          required
-        />
-        <label
-          htmlFor="password"
-          className="peer-focus:font-medium absolute md:text-sm text-xs text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Password
-        </label>
+        <div className="mb-6">
+          <label className="block mb-3 text-sm font-medium text-gray-900 dark:text-white">
+            패스워드
+          </label>
+          <input
+            type="pasword"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder=""
+            required
+          />
+        </div>
       </div>
       <div className="relative z-0 w-full mb-1 group">
-        <input
-          type="password"
-          name="confirmpassword"
-          id="floating_repeat_password"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          value={confirmpassword}
-          onChange={onChange}
-          required
-        />
-        <label
-          htmlFor="confirmpassword"
-          className="peer-focus:font-medium absolute md:text-sm text-xs text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Confirm password
-        </label>
+        <div className="mb-6">
+          <label
+            // for="email"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            패스워드 확인
+          </label>
+          <input
+            type="password"
+            id="password"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder=""
+            required
+          />
+        </div>
       </div>
     </>
   );

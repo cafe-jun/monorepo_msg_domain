@@ -1,10 +1,13 @@
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import App from './App';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <QueryClientProvider
     client={
@@ -18,6 +21,7 @@ root.render(
     }
   >
     <BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
       <App />
     </BrowserRouter>
   </QueryClientProvider>

@@ -13,8 +13,8 @@ axios.interceptors.request.use(
 );
 
 export const auth = async () => {
-  const res = await axios.get("/api/auth");
-  return res.data;
+  const res = await axios.get("/api/user/auth/check");
+  return res.data.result;
 };
 
 export const signup = async (data) => {

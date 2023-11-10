@@ -30,10 +30,10 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'web'),
-      exclude: ['/api*'],
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'web'),
+    //   exclude: ['/api*'],
+    // }),
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
