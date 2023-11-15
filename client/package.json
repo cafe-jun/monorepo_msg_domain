@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.18",
+    "@mui/styles": "^5.14.18",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^5.8.1",
     "@testing-library/jest-dom": "^6.1.4",
@@ -19,7 +23,9 @@
     "flowbite-react": "^0.6.4",
     "moment": "^2.29.4",
     "mongoose": "^8.0.0",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.11.0",
@@ -27,6 +33,7 @@
     "react-router-dom": "^6.18.0",
     "react-scripts": "^5.0.1",
     "socket.io-client": "^4.7.2",
+    "styled-components": "^6.1.1",
     "typescript": "^5.2.2",
     "web-vitals": "^3.5.0"
   },

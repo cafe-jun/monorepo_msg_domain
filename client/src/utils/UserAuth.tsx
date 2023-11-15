@@ -20,13 +20,13 @@ const UserAuth: React.FC<{ children: React.ReactNode }> = ({
     queryFn: auth,
     queryKey: [AUTH],
     retry: false,
-    onError: () => navigate("/signup"),
+    onError: () => navigate("/signin"),
   });
 
   const userLogout = () => {
     localStorage.removeItem("access-token");
     refetch();
-    navigate("/api/auth/signup");
+    navigate("/signin");
   };
 
   return (

@@ -1,22 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Messenger from "./pages/Messenger";
 import UserAuth from "./utils/UserAuth";
-import RequireAuth from "./utils/RequireAuth";
-import Auth from "./pages/Auth";
+import SignIn from "./pages/Auth/Login";
+import styled from "styled-components";
 
 const App: React.FC = () => {
   return (
     <UserAuth>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Messenger />
-            </RequireAuth>
-          }
-        />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </UserAuth>
   );
