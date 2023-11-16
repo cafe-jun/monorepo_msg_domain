@@ -8,8 +8,6 @@ import {
   AuthContent,
   AuthHeader,
   Container,
-  SignInImg,
-  SignInLogo,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -35,7 +33,8 @@ import { GoogleLogo } from "./GoogleLogo";
 import { NaverLogo } from "./NaverLogo";
 // import useInput from "@hook/useInput";
 import styled from "styled-components";
-import BackGroundImg from "../../../public/assets/background.png";
+import BackGroundImg from "../../assets/background.png";
+
 const useStyles = makeStyles({
   signInForm: {
     justifyContent: "center",
@@ -82,7 +81,7 @@ const SignIn = () => {
   //   };
 
   return (
-    <div style={{ backgroundColor: "red" }}>
+    <div style={{ backgroundImage: BackGroundImg }}>
       <Container>
         <AuthBody>
           <AuthContainer>
