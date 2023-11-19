@@ -4,6 +4,7 @@ import { MsgToken } from './jwt/msg-token';
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Inject,

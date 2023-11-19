@@ -7,10 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { AccessTokenStrategy } from './strategy/access-token.strategy';
 import { RefreshTokenStrategy } from './strategy/refresh-token.strategy';
 import { AuthController } from './auth.controller';
+import { OAuth2Controller } from './oauth.controller';
 
 @Module({
   imports: [UserModule, PassportModule, JwtModule.register({})],
-  controllers: [AuthController],
+  controllers: [AuthController, OAuth2Controller],
   providers: [
     {
       provide: AuthService,
