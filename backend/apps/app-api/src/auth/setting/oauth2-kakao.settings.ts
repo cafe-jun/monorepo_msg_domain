@@ -20,4 +20,7 @@ export class OAuth2KakaoSettings {
   get kakao_scope(): string {
     return this.configService.get('oauth2.kakao_scope');
   }
+  get kakao_token_url(): string {
+    return this.configService.get('oauth2.kakao_token_url');
+  }
 }

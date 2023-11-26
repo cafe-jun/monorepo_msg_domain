@@ -9,6 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix('/api');
   console.log(join(__dirname, '..', 'client'));
   app.setBaseViewsDir(join(__dirname, '..', '.next', 'server', 'pages'));
+
   app.setViewEngine('html');
   app.useLogger(app.get(Logger));
   app.flushLogs();

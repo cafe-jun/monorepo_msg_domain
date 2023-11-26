@@ -6,21 +6,22 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.18",
-    "@mui/styles": "^5.14.18",
+    "@mui/system": "^5.14.18",
     "@tanstack/react-query": "^4.36.1",
-    "@tanstack/react-query-devtools": "^5.8.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.7",
-    "@types/node": "^20.8.10",
     "@types/react": "^18.2.35",
     "@types/react-dom": "^18.2.14",
     "axios": "^1.6.0",
     "buffer": "^6.0.3",
     "daisyui": "^3.9.4",
+    "eslint-config-react-app": "6",
     "flowbite": "^2.0.0",
     "flowbite-react": "^0.6.4",
+    "global": "^4.4.0",
     "moment": "^2.29.4",
     "mongoose": "^8.0.0",
     "query-string": "^8.1.0",
@@ -34,16 +35,16 @@
     "react-scripts": "^5.0.1",
     "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.1",
-    "typescript": "^5.2.2",
-    "web-vitals": "^3.5.0"
+    "typescript": "^4",
+    "web-vitals": "^3.5.0",
+    "webpack": "^5.89.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
-  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -63,8 +64,14 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "autoprefixer": "^10.4.16",
+    "customize-cra": "^1.0.0",
     "postcss": "^8.4.31",
+    "react-app-rewire-alias": "^1.1.7",
+    "react-app-rewired": "^2.2.1",
     "tailwindcss": "^3.3.5"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

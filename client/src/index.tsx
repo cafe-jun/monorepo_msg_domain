@@ -5,6 +5,13 @@ import App from "./App";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+declare global {
+  interface Window {
+    naver: any;
+    Kakao: any;
+  }
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

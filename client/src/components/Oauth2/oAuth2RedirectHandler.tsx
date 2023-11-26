@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./oAuth2RedrectUrl";
+import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import queryString from "query-string";
-import { getCookie, setCookie } from "../../common/util/cookie";
+import { getCookie } from "../../common/util/cookie";
 
 const OAuth2RedirectHandler = () => {
-  const location = useLocation().search;
-  useEffect(() => {
-    const { token } = queryString.parse(location);
-    console.log(token);
-    if (token) {
-      setCookie(ACCESS_TOKEN, token as string, { path: "/" });
-    }
-  }, []);
+  const location = useLocation();
+  const service = location.pathname.split("/")[3];
 
-  return getCookie(ACCESS_TOKEN) ? (
-    <Navigate replace to="/" />
-  ) : (
-    <Navigate replace to="/auth/sign_in" />
-  );
+  const getRedirectHandlerByService = () => {
+    switch (service) {
+      case "naver":
+        return <NaverRedirectHandler />;
+      case "kakao":
+        return <KakaoRedirectHandler />;
+      case "google":
+        return <GoogleRedirectHandler />;
+      default:
+        throw new Error("unknown token");
+    }
+  };
+
+  const RedirectHandler = getRedirectHandlerByService();
+  // getCookie(ACCESS_TOKEN) ? (
+  //   <Navigate replace to="/" />
+  // ) :
+  return { RedirectHandler };
 };
 
 export default OAuth2RedirectHandler;

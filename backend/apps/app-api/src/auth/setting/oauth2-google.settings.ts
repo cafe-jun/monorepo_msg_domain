@@ -20,4 +20,7 @@ export class OAuth2GoogleSettings {
   get google_scope(): string {
     return this.configService.get('oauth2.google_scope');
   }
+  get google_user_profile_api(): string {
+    return this.configService.get('oauth2.google_user_profile_api');
+  }
 }

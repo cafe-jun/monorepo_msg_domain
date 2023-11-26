@@ -20,4 +20,10 @@ export class OAuth2NaverSettings {
   get naver_scope(): string {
     return this.configService.get('oauth2.naver_scope');
   }
+  get naver_token_url(): string {
+    return this.configService.get('oauth2.naver_token_url');
+  }
+  get naver_user_profile_api(): string {
+    return this.configService.get('oauth2.naver_user_profile_api');
+  }
 }

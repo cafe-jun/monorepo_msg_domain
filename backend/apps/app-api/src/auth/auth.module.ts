@@ -18,11 +18,16 @@ import { OAuth2GoogleSettings } from './setting/oauth2-google.settings';
 import { OAuth2KakaoSettings } from './setting/oauth2-kakao.settings';
 import { OAuth2Service } from './oauth2.service';
 import configureation from './setting/configureation';
+import { HttpModule } from '@nestjs/axios';
+import { ApiCallService } from '../common/http/api-call.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [configureation],
+    }),
+    HttpModule.register({
+      timeout: 5000,
     }),
     UserModule,
     PassportModule,
@@ -38,6 +43,7 @@ import configureation from './setting/configureation';
     OAuth2KakaoSettings,
     OAuth2NaverSettings,
     OAuth2GoogleSettings,
+    ApiCallService,
     {
       provide: AuthService,
       useClass: AuthServiceImpl,
