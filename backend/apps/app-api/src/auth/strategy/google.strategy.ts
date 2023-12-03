@@ -10,11 +10,21 @@ export class GoogleStrategy implements OAuth2Strategy {
     private apiCallService: ApiCallService,
   ) {}
   async getUserProfile(token: string): Promise<UserProfile> {
-    await this.apiCallService.post(this.setting.google_user_profile_api);
+    return await this.apiCallService.post(
+      this.setting.google_user_profile_api,
+      undefined,
+      { Authorization: `Bearer ${token}` },
+    );
   }
 
   getToken(code: string): Promise<any> {
-    throw new Error('Method not implemented.');
+    return this.apiCallService.post(this.setting.google_token_url, {
+      code,
+      client_id: this.setting.google_client_id,
+      client_secret: this.setting.google_secret_id,
+      redirect_uri: this.setting.google_redirect_url,
+      grant_type: 'authorization_code',
+    });
   }
 
   getProvider(): string {

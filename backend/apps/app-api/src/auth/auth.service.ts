@@ -9,6 +9,7 @@ export interface AuthService {
   signin(dto: UserSignInDto): Promise<MsgToken>;
   signup(dto: UserSignUpDto): Promise<Partial<User>>;
   signout(id: number): Promise<void>;
+  generateToken(id: number, email: string): Promise<MsgToken>;
   refreshToken(
     id: number,
     email: string,

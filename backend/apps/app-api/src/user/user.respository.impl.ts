@@ -11,7 +11,11 @@ export class UserRepositoryImpl implements UserRepository {
     private dataSource: Repository<User>,
   ) {}
   findOneByEmail(email: string): Promise<User> {
-    return this.dataSource.findOneBy({ email });
+    return this.dataSource.findOne({
+      where: {
+        email,
+      },
+    });
   }
   findOneById(id: number): Promise<User> {
     return this.dataSource.findOneBy({ id });

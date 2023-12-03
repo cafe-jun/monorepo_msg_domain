@@ -66,7 +66,7 @@ describe('AuthService', () => {
       dto.password = 'cafejun123';
       dto.nickname = 'test1231';
       const salt = crypto.getSalt();
-      entity = User.of(dto.email, dto.password, salt, dto.nickname);
+      entity = User.of(dto.email, dto.nickname);
     });
 
     it('[auth][service] 회원가입 성공', async () => {
@@ -110,8 +110,7 @@ describe('AuthService', () => {
       dto = new UserSignInDto();
       dto.email = 'test@example.com';
       dto.password = 'password';
-      salt = crypto.getSalt();
-      entity = User.of(dto.email, dto.password, salt, 'nickname');
+      entity = User.of(dto.email, 'nickname');
     });
     it('[auth][service] 로그인 성공', async () => {
       const accessToken = 'access_token';
@@ -139,11 +138,6 @@ describe('AuthService', () => {
 
       expect(signinSpy).toHaveBeenCalledWith(dto);
       expect(findUserByEmailSpy).toHaveBeenCalledWith(dto.email);
-      expect(verifySpy).toHaveBeenCalledWith(
-        dto.password,
-        salt,
-        entity.password,
-      );
       expect(jwtSignSpy).toHaveBeenCalledTimes(2);
       expect(jwtSignSpy).toHaveBeenCalledWith(payload, {
         secret: process.env.JWT_ACCESS_SECRET,
@@ -186,11 +180,7 @@ describe('AuthService', () => {
       await expect(result).rejects.toThrow(UserIncorrectPasswordException);
       expect(signinSpy).toHaveBeenCalledWith(dto);
       expect(findUserByEmailSpy).toHaveBeenCalledWith(dto.email);
-      expect(verifySpy).toHaveBeenCalledWith(
-        dto.password,
-        salt,
-        entity.password,
-      );
+      expect(verifySpy).toHaveBeenCalledWith(dto.password);
     });
   });
   describe('로그아웃', () => {
@@ -199,7 +189,7 @@ describe('AuthService', () => {
     const salt = crypto.getSalt();
     beforeEach(() => {
       userId = 10;
-      user = User.of('ema@a.com', 'pass', salt, 'nick');
+      user = User.of('ema@a.com', 'nick');
     });
     it('[auth][service] 로그아웃 성공', async () => {
       const signoutSpy = jest.spyOn(authService, 'signout');
@@ -234,7 +224,7 @@ describe('AuthService', () => {
     let user: User;
     const salt = crypto.getSalt();
     beforeEach(async () => {
-      user = User.of('ema@a.com', 'pass', salt, 'nick');
+      user = User.of('ema@a.com', 'nick');
       user.refreshToken = 'test_refresh_token';
     });
     it('[auth][service] 토큰 재발급 성공', async () => {

@@ -15,21 +15,23 @@ export class OAuth2Service {
     if (!strategy) {
       throw new Error('unknown OAuth2 strategy' + service);
     }
-    return strategy.getProvider();
+    return this.oauth2Strategy[service].getProvider();
   }
-  async getToken(service: string, code: string) {
-    const result = await this.oauth2Strategy[service].getToken(code);
-    return result;
+  async callbackProcess(service: string, code: string) {
+    const strategy = this.oauth2Strategy[service] as OAuth2Strategy;
+    const token = await strategy.getToken(code);
+    const oauthUser = await this.getUserProfile(strategy, token.access_token);
+    console.log('oauthUser', oauthUser);
+    const user = await this.userService.findUserByEmail(oauthUser.email);
+    if (!user) {
+      await this.userService.save(
+        User.oauthOf(oauthUser.email, oauthUser.nickname),
+      );
+    }
+    return oauthUser;
   }
 
-  async vertifyToken(service: string, code: string) {
-    const result = await this.oauth2Strategy[service].getToken(code);
-    return result;
-  }
-  async getUserProfile(service: string, token: string) {
-    const result = (await this.oauth2Strategy[service].getUserProfile(
-      token,
-    )) as UserProfile;
-    return result;
+  private async getUserProfile(strategy: OAuth2Strategy, token: string) {
+    return strategy.getUserProfile(token);
   }
 }

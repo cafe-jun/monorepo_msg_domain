@@ -23,4 +23,7 @@ export class OAuth2KakaoSettings {
   get kakao_token_url(): string {
     return this.configService.get('oauth2.kakao_token_url');
   }
+  get kakao_user_profile_url(): string {
+    return this.configService.get('oauth2.kakao_user_profile_url');
+  }
 }

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import UserAuth from "./utils/UserAuth";
 import SignIn from "./pages/Auth/SingIn";
-import OAuth2RedirectHandler from "./components/Oauth2/OAuth2RedirectHandler";
+import OAuth2RedirectHandler from "./components/oauth2/OAuth2RedirectHandler";
 
 const App: React.FC = () => {
   return (

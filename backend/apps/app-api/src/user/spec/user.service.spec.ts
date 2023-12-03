@@ -5,7 +5,7 @@ import { UserService } from '../user.service';
 import { UserRepository } from '../user.respository';
 
 const createUser = (salt) => {
-  return User.of('test@test.com', '123', salt, 'nick');
+  return User.of('test@test.com', 'nick');
 };
 
 describe('[user][service]', () => {
@@ -82,7 +82,7 @@ describe('[user][service]', () => {
     it('응답 성공', async () => {
       // Given
       const user = createUser(salt);
-      const saveUser = User.of(user.email, user.password, salt, user.nickname);
+      const saveUser = User.of(user.email, user.nickname);
 
       const saveServiceSpy = jest.spyOn(userService, 'save');
       const saveRepoistory = jest

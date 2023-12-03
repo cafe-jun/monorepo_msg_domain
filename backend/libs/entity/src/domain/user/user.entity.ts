@@ -9,13 +9,6 @@ export class User extends PrimaryGeneratedPkEntity {
   @Column()
   email: string;
 
-  @IsOptional()
-  @Column('varchar')
-  password: string;
-
-  @Column('varchar')
-  salt: string;
-
   @Column('varchar', { nullable: true })
   nickname: string;
 
@@ -25,24 +18,17 @@ export class User extends PrimaryGeneratedPkEntity {
   @OneToMany(() => UserChatRoom, (userChatRoom) => userChatRoom.user)
   userChatRooms!: UserChatRoom[];
 
-  private constructor(
-    email: string,
-    password: string,
-    salt: string,
-    nickname: string,
-  ) {
-    super();
-    this.email = email;
-    this.password = password;
-    this.salt = salt;
-    this.nickname = nickname;
+  static of(email: string, nickname: string): User {
+    const user = new User();
+    user.email = email;
+    user.nickname = nickname;
+    return user;
   }
-  static of(
-    email: string,
-    password: string,
-    salt: string,
-    nickname: string,
-  ): User {
-    return new User(email, password, salt, nickname);
+
+  static oauthOf(email: string, nickname: string): User {
+    const user = new User();
+    user.email = email;
+    user.nickname = nickname;
+    return user;
   }
 }

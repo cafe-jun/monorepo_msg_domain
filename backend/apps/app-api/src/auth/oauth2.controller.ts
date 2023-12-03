@@ -36,29 +36,22 @@ export class OAuth2Controller {
     @Res() res: Response,
   ): Promise<void> {
     const provider = await this.oauthService.oauthAuthenticate(service);
-    console.log('provider: ', provider);
     return res.redirect(`${provider}`);
   }
 
   @Get('callback/:service')
   async callBackProcess(
     @Param('service') service: string,
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
+    @Query('code') code: string,
+    @Res() res: Response,
   ) {
     /**
      * 카카오랑 네이버는 response 타입이 query로 code를 내려줌
      */
-    const { code } = req.query;
-    await this.oauthService.getToken(service, code as string);
-  }
-  @Post('profile')
-  async getUserProfile(
-    @Body('service') service: string,
-    @Body('token') token: string,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const result = await this.oauthService.getUserProfile(service, token);
-    return result;
+    const user = await this.oauthService.callbackProcess(service, code);
+    const token = await this.authService.generateToken(user.id, user.email);
+    res.cookie('access-token', token.accessToken, { httpOnly: true });
+    res.cookie('refresh-token', token.refreshToken, { httpOnly: true });
+    return res.redirect('http://localhost:3000/lobby');
   }
 }
