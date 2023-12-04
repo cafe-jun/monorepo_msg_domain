@@ -22,6 +22,7 @@ import { MessageModule } from './message/message.module';
 import { Message } from '@app/entity/domain/message/message.entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { CoreGateway } from './core/core.gateway';
 /**   Incoming request
  *    -> Middleware -> Guards -> Interceptors
  *    -> Pipes -> Controller -> Service
@@ -86,6 +87,7 @@ import { join } from 'path';
   // controllers: [AppApiController],
   providers: [
     AppApiService,
+    CoreGateway,
     {
       provide: APP_PIPE,
       useFactory: () =>

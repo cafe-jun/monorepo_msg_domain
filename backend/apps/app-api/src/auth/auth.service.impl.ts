@@ -27,12 +27,8 @@ export class AuthServiceImpl implements AuthService {
       throw new UserIncorrectEmailException();
     }
     this.logger.log(`user check :: ${JSON.stringify(user)}`);
-    const verifyPassword = await verifyString(
-      user.password,
-      user.salt,
-      dto.password,
-    );
-
+    // TODO : 변경 진행
+    const verifyPassword = null;
     if (!verifyPassword) {
       throw new UserIncorrectPasswordException();
     }
@@ -48,7 +44,7 @@ export class AuthServiceImpl implements AuthService {
     this.logger.log('auth signup', await dto.toEntity());
     const saveUser = await this.userService.save(await dto.toEntity());
     console.log('user:', user);
-    const { password, salt, createdAt, updatedAt, ...restUser } = saveUser;
+    const { createdAt, updatedAt, ...restUser } = saveUser;
     return restUser;
   }
   async signout(id: number): Promise<void> {

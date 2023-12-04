@@ -7,18 +7,10 @@ export class UserSignUpDto {
   email: string;
 
   @IsNotEmpty()
-  password: string;
-
-  @IsNotEmpty()
   nickname: string;
 
   async toEntity(): Promise<User> {
     const salt = getSalt();
-    return User.of(
-      this.email,
-      await hashCrypto(this.password, salt),
-      salt,
-      this.nickname,
-    );
+    return User.of(this.email, this.nickname);
   }
 }

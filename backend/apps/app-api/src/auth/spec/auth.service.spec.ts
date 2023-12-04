@@ -63,9 +63,7 @@ describe('AuthService', () => {
     beforeEach(() => {
       dto = new UserSignUpDto();
       dto.email = 'test@test.com';
-      dto.password = 'cafejun123';
       dto.nickname = 'test1231';
-      const salt = crypto.getSalt();
       entity = User.of(dto.email, dto.nickname);
     });
 

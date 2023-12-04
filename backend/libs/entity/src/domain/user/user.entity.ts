@@ -1,6 +1,6 @@
 import { Column, Entity, Index, OneToMany } from 'typeorm';
 import { PrimaryGeneratedPkEntity } from '../common/primary-generated-pk.entity';
-import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsEmail } from 'class-validator';
 import { UserChatRoom } from '../chat-room/user-chat-room.entity';
 
 @Entity({ database: 'message' })
