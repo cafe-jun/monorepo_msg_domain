@@ -3001,6 +3001,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"builder-pattern@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "builder-pattern@npm:2.2.0"
+  checksum: 7263919ef2d83b2b7bca516bad12e9caa6c86aaa66a649a2825245e7bfe5e7a354ed8755fb5911b1a6873978018c10ac6691dfd31748038feebfd3a48d2adf72
+  languageName: node
+  linkType: hard
+
 "busboy@npm:^1.0.0, busboy@npm:^1.6.0":
   version: 1.6.0
   resolution: "busboy@npm:1.6.0"
@@ -6716,6 +6723,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.0.0"
     "@typescript-eslint/parser": "npm:^5.0.0"
     axios: "npm:^1.6.2"
+    builder-pattern: "npm:^2.2.0"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.0"
     cross-env: "npm:^7.0.3"

@@ -19,11 +19,12 @@ export class SocketService {
   public socketId = "";
 
   private constructor() {
-    const socket_url = process.env.REACT_APP_SOCKET_URL as string;
-    this.socket = io(socket_url, {
+    const socket_url = process.env.REACT_APP_SOCKET_URL;
+    console.log("socketurl", socket_url);
+    this.socket = io("http://localhost:3001/core", {
       transports: ["websocket"],
       closeOnBeforeunload: false,
-      path: process.env.REACT_APP_SOCKET_PATH,
+      // path: process.env.REACT_APP_SOCKET_PATH,
     });
     this.socket.connect();
     // TODO: 타이밍 이슈 여부 파악 및 해결
