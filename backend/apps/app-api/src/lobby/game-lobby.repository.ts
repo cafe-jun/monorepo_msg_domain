@@ -1,7 +1,7 @@
 import { GameLobby } from '@app/entity/domain/lobby/game-lobby.entity';
 import { User } from '@app/entity/domain/user/user.entity';
 
-export const LobbyRepositoryToken = 'LobbyRepository';
+export const GameLobbyRepositoryToken = 'LobbyRepository';
 
 export interface GameLobbyRepository {
   create(user: User);

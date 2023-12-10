@@ -36,22 +36,22 @@ export class CoreGateway implements OnGatewayConnection, OnGatewayDisconnect {
     await this.userService.save(User.of(client.id, 'noname'));
   }
 
-  //   @SubscribeMessage('update-user-name')
-  //   async handleCreateUser(
-  //     @ConnectedSocket() client: Socket,
-  //     @MessageBody() userName: string,
-  //   ) {
-  //     return await this.userService.update(
-  //       client.id,
-  //       User.of(client.id, userName),
-  //     );
-  //   }
+  // @SubscribeMessage('update-user-name')
+  // async handleCreateUser(
+  //   @ConnectedSocket() client: Socket,
+  //   @MessageBody() userName: string,
+  // ) {
+  //   return await this.userService.update(
+  //     client.id,
+  //     User.of(client.id, userName),
+  //   );
+  // }
 
   @SubscribeMessage('create-lobby')
   // TODO: return type WsResponse 로 바꿔야함. + 학습 필요.
   async handleCreateLobby(@ConnectedSocket() client: Socket) {
     // TODO: socket connection 라이프 사이클에 user 생성, 삭제 로직 할당
-    const user = await this.userService.getUser(client.id);
+    const user = await this.userService.findUserById(client.id);
     const lobbyId = await this.lobbyService.createLobby(user);
     await client.join(lobbyId);
     return lobbyId;

@@ -16,7 +16,7 @@ export class GameLobbyRepositoryImpl implements GameLobbyRepository {
     const gameLobby = Builder<GameLobby>().hostId(user.id).build();
   }
   updateUser(gameLobby: GameLobby, user: User) {
-    throw new Error('Method not implemented.');
+    const updateLobby = Builder<GameLobby>().build();
   }
   delete() {
     throw new Error('Method not implemented.');
